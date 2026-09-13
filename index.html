@@ -7,139 +7,353 @@
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: Arial, sans-serif;
-      background: #0b0f14;
-      color: #ffffff;
+      background:
+        radial-gradient(circle at top left, #172554, transparent 35%),
+        radial-gradient(circle at top right, #064e3b, transparent 30%),
+        #05070c;
+      color: #fff;
       line-height: 1.6;
     }
 
-    header {
-      text-align: center;
-      padding: 50px 20px 35px;
-      background: #111827;
-      border-bottom: 1px solid #263244;
+    a {
+      text-decoration: none;
     }
 
-    header h1 {
-      font-size: 38px;
-      margin-bottom: 10px;
+    /* NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 16px 20px;
+      background: rgba(5, 7, 12, 0.9);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    header p {
-      color: #aeb8c8;
-      font-size: 16px;
-    }
-
-    .container {
-      max-width: 950px;
+    .nav-inner {
+      max-width: 1100px;
       margin: auto;
-      padding: 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .section-title {
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #25d366;
+    }
+
+    .nav-btn {
+      color: white;
+      border: 1px solid #30394a;
+      padding: 9px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 20px 70px;
       text-align: center;
-      margin-bottom: 30px;
     }
 
-    .section-title h2 {
-      font-size: 28px;
-      margin-bottom: 8px;
+    .badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 30px;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.3);
+      color: #5ee88a;
+      font-size: 13px;
+      margin-bottom: 22px;
     }
 
-    .section-title p {
-      color: #9ca8b8;
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 72px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
     }
 
-    .products {
+    .hero h1 span {
+      background: linear-gradient(90deg, #25d366, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #aeb7c7;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    .primary-btn {
+      background: #25d366;
+      color: #061009;
+    }
+
+    .secondary-btn {
+      border: 1px solid #30394a;
+      color: white;
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-heading small {
+      color: #25d366;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-heading h2 {
+      font-size: 34px;
+      margin: 8px 0;
+    }
+
+    .section-heading p {
+      color: #8994a6;
+    }
+
+    /* PRODUCTS */
+    .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
-    .card {
-      background: #111827;
-      border: 1px solid #263244;
-      border-radius: 16px;
-      padding: 25px;
-      text-align: center;
-      transition: 0.2s;
+    .service {
+      position: relative;
+      padding: 30px;
+      border-radius: 20px;
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
+      );
+      border: 1px solid rgba(255,255,255,0.09);
+      transition: 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #3b82f6;
+    .service:hover {
+      transform: translateY(-7px);
+      border-color: rgba(37,211,102,0.45);
     }
 
-    .card h3 {
-      font-size: 21px;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: #aeb8c8;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .price {
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(37,211,102,0.12);
       font-size: 25px;
-      font-weight: bold;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    .order-btn {
-      display: inline-block;
+    .popular {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #061009;
       background: #25d366;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 5px 9px;
+      border-radius: 20px;
     }
 
-    .order-btn:hover {
-      opacity: 0.9;
-    }
-
-    .contact {
-      margin-top: 45px;
-      background: #111827;
-      border: 1px solid #263244;
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    .contact h2 {
+    .service h3 {
+      font-size: 21px;
       margin-bottom: 10px;
     }
 
-    .contact p {
-      color: #aeb8c8;
-      margin-bottom: 20px;
+    .service p {
+      color: #99a4b5;
+      font-size: 14px;
+      min-height: 70px;
     }
 
+    .price {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 20px 0;
+    }
+
+    .price span {
+      font-size: 13px;
+      color: #7f8999;
+      font-weight: normal;
+    }
+
+    .order {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      background: #25d366;
+      color: #061009;
+      font-weight: 800;
+    }
+
+    /* WHY US */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .feature p {
+      color: #8f9aaa;
+      font-size: 14px;
+    }
+
+    /* PROCESS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #25d366;
+      color: #061009;
+      font-weight: 900;
+    }
+
+    .step p {
+      color: #929dad;
+      font-size: 14px;
+      margin-top: 7px;
+    }
+
+    /* CTA */
+    .cta {
+      max-width: 900px;
+      margin: 50px auto 80px;
+      padding: 55px 25px;
+      text-align: center;
+      border-radius: 25px;
+      background: linear-gradient(
+        135deg,
+        rgba(37,211,102,0.13),
+        rgba(59,130,246,0.12)
+      );
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .cta h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #9da7b7;
+      margin-bottom: 25px;
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 35px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: #697586;
       font-size: 13px;
-      border-top: 1px solid #1d2735;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 30px;
+    footer strong {
+      color: white;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .services,
+      .features,
+      .steps {
+        grid-template-columns: 1fr;
       }
 
-      .container {
-        padding: 30px 15px;
+      .hero {
+        padding-top: 65px;
+      }
+
+      .section {
+        padding: 55px 18px;
+      }
+
+      .section-heading h2 {
+        font-size: 28px;
       }
     }
   </style>
@@ -147,90 +361,273 @@
 
 <body>
 
-  <header>
-    <h1>Judas Digital Store</h1>
-    <p>Professional digital setup and management services</p>
-  </header>
-
-  <main class="container">
-
-    <div class="section-title">
-      <h2>Our Services</h2>
-      <p>Choose a service and contact us on WhatsApp to place your order.</p>
-    </div>
-
-    <div class="products">
-
-      <div class="card">
-        <h3>Facebook Page Management</h3>
-        <p>
-          Professional assistance with setting up and managing your
-          Facebook page.
-        </p>
-        <div class="price">₦3,000</div>
-
-        <a
-          class="order-btn"
-          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20Facebook%20Page%20Management%20for%20%E2%82%A63%2C000."
-          target="_blank">
-          Order on WhatsApp
-        </a>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">
+        Judas <span>Digital Store</span>
       </div>
-
-
-      <div class="card">
-        <h3>Nigeria Facebook Page Setup</h3>
-        <p>
-          Get help setting up a professional Facebook page for your
-          business or personal brand.
-        </p>
-        <div class="price">₦5,000</div>
-
-        <a
-          class="order-btn"
-          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20Nigeria%20Facebook%20Page%20Setup%20for%20%E2%82%A65%2C000."
-          target="_blank">
-          Order on WhatsApp
-        </a>
-      </div>
-
-
-      <div class="card">
-        <h3>USA WhatsApp Business Setup</h3>
-        <p>
-          Assistance with setting up a WhatsApp Business presence
-          for legitimate business use.
-        </p>
-        <div class="price">₦5,000</div>
-
-        <a
-          class="order-btn"
-          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20USA%20WhatsApp%20Business%20Setup%20for%20%E2%82%A65%2C000."
-          target="_blank">
-          Order on WhatsApp
-        </a>
-      </div>
-
-    </div>
-
-
-    <div class="contact">
-      <h2>Need Help?</h2>
-      <p>Contact Judas Digital Store directly on WhatsApp.</p>
 
       <a
-        class="order-btn"
-        href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20need%20help%20with%20an%20order."
+        class="nav-btn"
+        href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20to%20make%20an%20inquiry."
+        target="_blank">
+        WhatsApp
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="badge">
+      ✦ WELCOME TO JUDAS DIGITAL STORE
+    </div>
+
+    <h1>
+      Your Digital
+      <span>Services Hub.</span>
+    </h1>
+
+    <p>
+      Professional digital setup and management services
+      for individuals, businesses and brands.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a class="primary-btn" href="#services">
+        View Services
+      </a>
+
+      <a
+        class="secondary-btn"
+        href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20need%20a%20digital%20service."
         target="_blank">
         Chat on WhatsApp
       </a>
+
     </div>
 
-  </main>
+  </section>
 
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+
+    <div class="section-heading">
+      <small>Our Services</small>
+      <h2>Choose What You Need</h2>
+      <p>Select a service and contact us on WhatsApp.</p>
+    </div>
+
+    <div class="services">
+
+
+      <!-- FACEBOOK PAGE -->
+
+      <div class="service">
+
+        <div class="icon">🇳🇬</div>
+
+        <div class="popular">
+          POPULAR
+        </div>
+
+        <h3>Facebook Page Setup</h3>
+
+        <p>
+          Professional setup assistance for a Facebook page
+          for your business, brand or personal project.
+        </p>
+
+        <div class="price">
+          ₦5,000
+          <span>/ service</span>
+        </div>
+
+        <a
+          class="order"
+          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20Facebook%20Page%20Setup%20for%20%E2%82%A65%2C000."
+          target="_blank">
+          Order on WhatsApp →
+        </a>
+
+      </div>
+
+
+      <!-- FACEBOOK -->
+
+      <div class="service">
+
+        <div class="icon">📱</div>
+
+        <h3>Facebook Service</h3>
+
+        <p>
+          Digital assistance for legitimate Facebook setup,
+          management and related services.
+        </p>
+
+        <div class="price">
+          ₦3,000
+          <span>/ service</span>
+        </div>
+
+        <a
+          class="order"
+          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20the%20Facebook%20Service%20for%20%E2%82%A63%2C000."
+          target="_blank">
+          Order on WhatsApp →
+        </a>
+
+      </div>
+
+
+      <!-- WHATSAPP -->
+
+      <div class="service">
+
+        <div class="icon">💬</div>
+
+        <h3>WhatsApp Business Setup</h3>
+
+        <p>
+          Assistance with setting up a WhatsApp Business
+          presence for legitimate business use.
+        </p>
+
+        <div class="price">
+          ₦5,000
+          <span>/ service</span>
+        </div>
+
+        <a
+          class="order"
+          href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20want%20WhatsApp%20Business%20Setup%20for%20%E2%82%A65%2C000."
+          target="_blank">
+          Order on WhatsApp →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WHY CHOOSE US -->
+
+  <section class="section">
+
+    <div class="section-heading">
+      <small>Why Choose Us</small>
+      <h2>Simple & Professional</h2>
+      <p>We make the process easy from start to finish.</p>
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <strong>⚡ Fast Service</strong>
+        <p>
+          We aim to handle requests quickly and efficiently.
+        </p>
+      </div>
+
+      <div class="feature">
+        <strong>💬 WhatsApp Support</strong>
+        <p>
+          Contact us directly and discuss your requirements.
+        </p>
+      </div>
+
+      <div class="feature">
+        <strong>🔒 Legitimate Services</strong>
+        <p>
+          Our services are designed for legitimate digital
+          and business use.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section class="section">
+
+    <div class="section-heading">
+      <small>How It Works</small>
+      <h2>Three Easy Steps</h2>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="number">1</div>
+        <h3>Choose</h3>
+        <p>Choose the service you want.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <h3>Message Us</h3>
+        <p>Tap the WhatsApp order button.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <h3>Get Started</h3>
+        <p>Discuss the details and begin your service.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <h2>Ready to Get Started?</h2>
+
+    <p>
+      Contact Judas Digital Store today.
+    </p>
+
+    <a
+      class="primary-btn"
+      href="https://wa.me/2348024679785?text=Hello%20Judas%20Digital%20Store%2C%20I%20am%20ready%20to%20order."
+      target="_blank">
+      Start WhatsApp Chat →
+    </a>
+
+  </section>
+
+
+  <!-- FOOTER -->
 
   <footer>
-    © 2026 Judas Digital Store. All rights reserved.
+
+    <p>
+      <strong>Judas Digital Store</strong>
+    </p>
+
+    <p>
+      Professional Digital Services
+    </p>
+
+    <br>
+
+    <p>
+      © 2026 Judas Digital Store. All rights reserved.
+    </p>
+
   </footer>
 
 </body>
